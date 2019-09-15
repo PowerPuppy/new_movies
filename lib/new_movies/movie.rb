@@ -1,0 +1,2 @@
+class NewMovies::Movie
+end
