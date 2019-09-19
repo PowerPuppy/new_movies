@@ -1,5 +1,5 @@
 class NewMovies::Movie
-  attr_accessor :title, :synopsis
+  attr_accessor :title, :synopsis, :url
 
   @@all = Array.new
   def today
@@ -8,35 +8,31 @@ class NewMovies::Movie
 
   def scrape_movies
     scrape_fandango
-    scrape_each_movie
   end
 
   def scrape_fandango
     site = "https://www.fandango.com"
     doc = Nokogiri::HTML(open(site))
-    @urls = Array.new
     list = doc.css("li.media")
     list.each do |movie|
-      url = movie.css("a")[0].attributes["href"].value
-      @urls << url
+      binding.pry
+      new_movie = NewMovies::Movie.new
+      new_movie.url = movie.css("a")[0].attributes["href"].value
+      new_movie.title = movie.css("a.heading-style-1").text
     end
   end
 
-  def scrape_each_movie
-    binding.pry
-    @urls.each do |url|
-      doc = Nokogiri::HTML(open(url))
-      movie = NewMovies::Movie.new
-      movie.title = doc.css("h1").text
-      movie.synopsis = synopsis = doc.css("p.mop__synopsis-content").text
-      end
+  def scrape_movie_details
+      doc = Nokogiri::HTML(open(@url))
+      @synopsis = doc.css("p.mop__synopsis-content").text
   end
 
-  def initialzie
+  def initialize
     @@all << self
   end
 
   def self.all
     @@all
   end
+
 end
