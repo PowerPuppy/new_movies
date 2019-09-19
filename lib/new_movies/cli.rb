@@ -1,23 +1,10 @@
 class NewMovies::CLI
   def call
     puts "\nWelcome movie fan!\n"
-    get_movies
-    list_movies
+    NewMovies::Scraper.new.get_movies
     menu
-
   end
 
-  def get_movies
-      #to be scraped
-      @movies = ["It Chapter Two (2019)",
-        "Hustlers",
-        "The Goldfinch",
-        "Ad Astra",
-        "Abominable (2019)",
-        "Gemini Man",
-        "Joker (2019)",
-        "The Addams Family (2019)"]
-  end
 
   def list_movies
     #list movies

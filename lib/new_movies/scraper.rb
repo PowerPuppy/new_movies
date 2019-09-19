@@ -1,22 +1,19 @@
 class NewMovies::Scraper
   require 'nokogiri'
   require 'open-uri'
+  attr_accessor :movies, :list
   site = "https://www.fandango.com/"
-
   doc = Nokogiri::HTML(open(site))
+  @movies = Array.new
+  @list = doc.css("li.media")
 
-  items = doc.css("li.media")
+  def get_movies
+    @list.each do |movie|
+      title = movie.css("a.heading-style-1").text
+      url = movie.css("a")[0].attributes["href"]
+      @movies << title
+    end
+  end
 
-  puts items.count
-
-  # articles = items.select{|item| item.css("figcaption.gallery-caption").count != 0}
-  # articles.count
-
-   items.each do |article|
-     title = article.css("a.heading-style-1").text
-     url = article.css("a")[0].attributes["href"]
-     puts url
-     puts title
-   end
 
 end
