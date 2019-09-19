@@ -1,12 +1,10 @@
 class NewMovies::CLI
+  attr_accessor :movies
   def call
     puts "\nWelcome movie fan!\n"
     list_movies
     menu
   end
-
-
-
 
   def list_movies
     #list movies

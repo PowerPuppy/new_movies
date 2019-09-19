@@ -4,8 +4,11 @@ class NewMovies::Scraper
   attr_accessor :urls, :list
   site = "https://www.fandango.com/"
   doc = Nokogiri::HTML(open(site))
-  @urls = Array.new
-  @list = doc.css("li.media")
+
+  def initialzie
+    @urls = Array.new
+    @list = doc.css("li.media")
+  end
 
   def todays_movies
     get_url
@@ -22,9 +25,9 @@ class NewMovies::Scraper
 def make_movies_from_url
   urls.each do |url|
     doc = Nokogiri::HTML(open(url))
-    NewMovies::Movie.new(:title, :synopsis)
     title = doc.css("h1").text
     synopsis = synopsis = doc.css("p.mop__synopsis-content").text
+    NewMovies::Movie.new(title, synopsis)
     end
   end
 
