@@ -10,9 +10,9 @@ class NewMovies::CLI
     #list movies
     puts "Please select a movie you would like to find out more about."
     NewMovies::Movie.new.today
-    movies = NewMovies::Movie.all
-    movies.each.with_index(1) do |movie, index|
-        puts "#{index}. #{movie.title}"
+    @movies = NewMovies::Movie.all
+    @movies.each.with_index(1) do |movie, index|
+        puts "#{index}. #{movie}"
       end
   end
 
@@ -23,7 +23,8 @@ class NewMovies::CLI
       input = gets.strip.downcase
       #logic of dealing with users input
       if input.to_i > 0
-        puts @movies[input.to_i - 1]
+        puts @movies[input.to_i - 1].title
+        puts @movies[input.to_i - 1].synopsis
       elsif input == "list"
           list_movies
       elsif input > @movies.count
