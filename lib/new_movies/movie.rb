@@ -15,7 +15,6 @@ class NewMovies::Movie
     doc = Nokogiri::HTML(open(site))
     list = doc.css("li.media")
     list.each do |movie|
-      binding.pry
       new_movie = NewMovies::Movie.new
       new_movie.url = movie.css("a")[0].attributes["href"].value
       new_movie.title = movie.css("a.heading-style-1").text

@@ -11,6 +11,7 @@ class NewMovies::CLI
     puts "Please select a movie you would like to find out more about."
     NewMovies::Movie.new.today
     @movies = NewMovies::Movie.all
+    @movies = @movies.drop(1)
     @movies.each.with_index(1) do |movie, index|
         puts "#{index}. #{movie.title}"
       end
@@ -19,10 +20,12 @@ class NewMovies::CLI
   def menu
     input = nil
     while input != "exit"
-      puts "\nEnter the number of the movie you'd like more info on or type exit\n"
+      puts "\nEnter the number of the movie you'd like more info on or type list, type or exit\n"
       input = gets.strip.downcase
       #logic of dealing with users input
-      if input.to_i > 0
+      if input.to_i > @movies.count
+
+      elsif input.to_i > 0
         puts @movies[input.to_i - 1].title
         @movies[input.to_i - 1].scrape_movie_details
         puts "Synopsis:"
@@ -32,10 +35,6 @@ class NewMovies::CLI
         @movies.each.with_index(1) do |movie, index|
             puts "#{index}. #{movie.title}"
           end
-      elsif input > @movies.count
-        puts "Not sure what you want, type list or exit"
-      else
-        puts "Not sure what you want, type list or exit"
       end
     end
   end
