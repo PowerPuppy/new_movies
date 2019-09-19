@@ -1,7 +1,7 @@
 class NewMovies::CLI
   def call
     puts "\nWelcome movie fan!\n"
-    get_movies
+    list_movies
     menu
   end
 
@@ -11,7 +11,8 @@ class NewMovies::CLI
   def list_movies
     #list movies
     puts "Please select a movie you would like to find out more about."
-    @movies = NewMovies::Movie.today
+    NewMovies::Scraper.todays_movies
+    @movies = NewMovies::Movie.all
     @movies.each.with_index(1) do |movie, index|
         puts "#{index}. #{movie.name}"
       end
@@ -27,6 +28,8 @@ class NewMovies::CLI
         puts @movies[input.to_i - 1]
       elsif input == "list"
           list_movies
+      elsif input > @movies.count
+        puts "Not sure what you want, type list or exit"
       else
         puts "Not sure what you want, type list or exit"
       end

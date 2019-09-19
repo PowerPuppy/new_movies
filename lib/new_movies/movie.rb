@@ -1,13 +1,15 @@
 class NewMovies::Movie
-  attr_accessor :title, :url, :run_time :rating
+  attr_accessor :title, :synopsis
+  @@all = []
 
-  def today
-    #Scrape fandango and return movies based on that data
-    self.scrape_movies
+  def initialzie(title, synopsis)
+    @title = title
+    @synopsis = synopsis
+    @@all << self
   end
 
-  def self.scrape_movies
-
   end
-
+  def self.all
+    @@all
+  end
 end
