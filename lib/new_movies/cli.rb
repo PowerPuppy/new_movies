@@ -11,7 +11,7 @@ class NewMovies::CLI
   def list_movies
     #list movies
     puts "Please select a movie you would like to find out more about."
-    NewMovies::Scraper.todays_movies
+    NewMovies::Scraper.new.todays_movies
     @movies = NewMovies::Movie.all
     @movies.each.with_index(1) do |movie, index|
         puts "#{index}. #{movie.name}"
