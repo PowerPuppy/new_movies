@@ -27,7 +27,7 @@ class NewMovies::CLI
 
       elsif input.to_i > 0
         puts @movies[input.to_i - 1].title
-        @movies[input.to_i - 1].scrape_movie_details
+        @movies[input.to_i - 1].scrape_details
         puts "Synopsis:"
         puts @movies[input.to_i - 1].synopsis
       elsif input == "list"

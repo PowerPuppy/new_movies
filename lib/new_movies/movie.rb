@@ -21,9 +21,9 @@ class NewMovies::Movie
     end
   end
 
-  def scrape_movie_details
+  def scrape_details
       doc = Nokogiri::HTML(open(@url))
-      @synopsis = doc.css("p.mop__synopsis-content").text
+      @synopsis = doc.css("p.mop__synopsis-content").text.chomp
   end
 
   def initialize
