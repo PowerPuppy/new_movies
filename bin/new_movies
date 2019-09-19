@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
-require_relative '../lib/new_movies'
+require "bundler/setup"
+require "new_movies"
 
 new_movies = NewMovies::CLI.new.call
