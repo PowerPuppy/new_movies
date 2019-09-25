@@ -20,7 +20,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+In terminal type "./bin/new_movies
+
+A list of movies will populate the screen.
+
+Type the number of the movie you want to find more information about.
+
+Type List to see the list of movies or Exit to exit the program.
 
 ## Development
 
