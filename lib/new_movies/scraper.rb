@@ -1,5 +1,4 @@
 class NewMovies::Scraper
-
   def self.scrape_movies
     site = "https://www.fandango.com"
     doc = Nokogiri::HTML(open(site))

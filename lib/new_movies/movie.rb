@@ -22,8 +22,7 @@ class NewMovies::Movie
 
   def self.find_by_word(word)
      self.all.select do |movie|
-       binding.pry
-       movie.title.downcase.includes? word.downcase
+       movie.title.downcase.include? word.downcase
      end
    end
 

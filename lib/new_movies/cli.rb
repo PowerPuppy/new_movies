@@ -3,11 +3,11 @@ class NewMovies::CLI
   def call
     puts "\nWelcome movie fan!\n"
     list_movies
+    binding.pry
     menu
   end
 
   def list_movies
-    #list movies
     puts "Please select a movie you would like to find out more about."
     NewMovies::Scraper.scrape_movies
     @movies = NewMovies::Movie.all
@@ -23,7 +23,7 @@ class NewMovies::CLI
       @input = gets.strip.downcase
       #logic of dealing with users input
       if @input.to_i > @movies.count
-
+        menu
       elsif @input.to_i > 0
         puts @movies[@input.to_i - 1].title
         @movies[@input.to_i - 1].scrape_details
