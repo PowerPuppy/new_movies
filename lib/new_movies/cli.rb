@@ -3,7 +3,6 @@ class NewMovies::CLI
   def call
     puts "\nWelcome movie fan!\n"
     list_movies
-    binding.pry
     menu
   end
 

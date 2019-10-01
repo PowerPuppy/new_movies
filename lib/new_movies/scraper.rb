@@ -12,7 +12,11 @@ class NewMovies::Scraper
 
   def self.scrape_synopsis(url)
       doc = Nokogiri::HTML(open(url))
-      synopsis = doc.css("p.mop__synopsis-content").text.chomp
+      if doc.css("p.mop__synopsis-content").text.strip != ""
+        synopsis = doc.css("p.mop__synopsis-content").text.strip
+      else
+        synopsis = doc.css("section.synopsis p.synopsis__text").text.strip
+      end
   end
 
 end
