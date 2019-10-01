@@ -3,14 +3,13 @@ class NewMovies::CLI
   def call
     puts "\nWelcome movie fan!\n"
     list_movies
-    #binding.pry
     menu
   end
 
   def list_movies
     #list movies
     puts "Please select a movie you would like to find out more about."
-    NewMovies::Movie.new.today
+    NewMovies::Movie.today
     @movies = NewMovies::Movie.all
     #@movies = @movies.drop(1)
     @movies.each.with_index(1) do |movie, index|
