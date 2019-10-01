@@ -16,6 +16,10 @@ class NewMovies::Movie
     @@all
   end
 
+  def scrape_details
+    @synopsis = NewMovies::Scraper.scrape_synopsis(@url)
+  end
+
   def self.find_by_word(word)
      self.all.select do |movie|
        binding.pry

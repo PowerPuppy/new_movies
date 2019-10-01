@@ -1,7 +1,4 @@
 class NewMovies::Scraper
-  def self.today
-    self.scrape_movies
-  end
 
   def self.scrape_movies
     site = "https://www.fandango.com"
@@ -14,9 +11,9 @@ class NewMovies::Scraper
     end
   end
 
-  def scrape_details
-      doc = Nokogiri::HTML(open(@url))
-      @synopsis = doc.css("p.mop__synopsis-content").text.chomp
+  def self.scrape_synopsis(url)
+      doc = Nokogiri::HTML(open(url))
+      synopsis = doc.css("p.mop__synopsis-content").text.chomp
   end
 
 end

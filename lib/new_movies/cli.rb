@@ -9,22 +9,11 @@ class NewMovies::CLI
   def list_movies
     #list movies
     puts "Please select a movie you would like to find out more about."
-    NewMovies::Movie.today
+    NewMovies::Scraper.scrape_movies
     @movies = NewMovies::Movie.all
-    #@movies = @movies.drop(1)
     @movies.each.with_index(1) do |movie, index|
         puts "#{index}. #{movie.title}"
       end
-  end
-
-  def learn_more
-    puts "Would you like to learn more?"
-    response = gets
-    if response.downcase == "yes" || "y"
-      system(open((@movies[@input.to_i - 1]).url))
-    else
-      menu
-    end
   end
 
   def menu
@@ -40,7 +29,6 @@ class NewMovies::CLI
         @movies[@input.to_i - 1].scrape_details
         puts "Synopsis:"
         puts @movies[@input.to_i - 1].synopsis
-        learn_more
       elsif @input == "list"
         puts "Please select a movie you would like to find out more about."
         @movies.each.with_index(1) do |movie, index|
