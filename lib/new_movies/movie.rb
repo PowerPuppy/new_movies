@@ -13,25 +13,36 @@ class NewMovies::Movie
   def scrape_fandango
     site = "https://www.fandango.com"
     doc = Nokogiri::HTML(open(site))
-    list = doc.css("li.media")
+    list = doc.css("section.footer-coming-soon a.footer-coming-soon--heading")
     list.each do |movie|
-      new_movie = NewMovies::Movie.new
-      new_movie.url = movie.css("a")[0].attributes["href"].value
-      new_movie.title = movie.css("a.heading-style-1").text
+      url = movie.attributes["href"].value
+      title = movie.text
+      binding.pry
+      NewMovies::Movie.new(url, title) if title
     end
   end
 
+
   def scrape_details
       doc = Nokogiri::HTML(open(@url))
-      @synopsis = doc.css("p.mop__synopsis-content").text.chomp
+        @synopsis = doc.css("p.mop__synopsis-content").text.chomp
   end
 
-  def initialize
+  def initialize(url, title)
+    @url = url
+    @title = title
     @@all << self
   end
 
   def self.all
     @@all
   end
+
+  def self.find_by_word(word)
+     self.all.select do |movie|
+       binding.pry
+       movie.title.downcase.includes? word.downcase
+     end
+   end
 
 end
