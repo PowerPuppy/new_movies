@@ -18,5 +18,4 @@ class NewMovies::Scraper
         synopsis = doc.css("section.synopsis p.synopsis__text").text.strip
       end
   end
-
 end

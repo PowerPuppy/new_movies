@@ -1,10 +1,6 @@
 class NewMovies::Movie
   attr_accessor :title, :synopsis, :url
-
   @@all = Array.new
-  def self.today
-    self.scrape_movies
-  end
 
   def initialize(url, title)
     @url = url
@@ -25,5 +21,4 @@ class NewMovies::Movie
        movie.title.downcase.include? word.downcase
      end
    end
-
 end

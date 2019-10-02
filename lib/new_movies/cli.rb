@@ -36,5 +36,4 @@ class NewMovies::CLI
       end
     end
   end
-
 end
